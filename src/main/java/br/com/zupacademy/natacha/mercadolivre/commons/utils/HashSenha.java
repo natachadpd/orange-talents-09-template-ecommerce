@@ -1,4 +1,4 @@
-package br.com.zupacademy.natacha.mercadolivre.utils;
+package br.com.zupacademy.natacha.mercadolivre.commons.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

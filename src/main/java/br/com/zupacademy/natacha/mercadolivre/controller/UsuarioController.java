@@ -1,10 +1,10 @@
-package br.com.zupacademy.natacha.mercadolivre.usuario;
+package br.com.zupacademy.natacha.mercadolivre.controller;
 
+import br.com.zupacademy.natacha.mercadolivre.entity.Usuario;
+import br.com.zupacademy.natacha.mercadolivre.controller.form.UsuarioForm;
+import br.com.zupacademy.natacha.mercadolivre.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -15,6 +15,7 @@ import javax.validation.Valid;
 
         @Autowired
         private UsuarioRepository usuarioRepository;
+
 
         @PostMapping
         @Transactional
