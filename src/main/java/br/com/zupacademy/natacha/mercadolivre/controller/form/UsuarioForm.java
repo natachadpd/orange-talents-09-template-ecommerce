@@ -4,11 +4,14 @@ package br.com.zupacademy.natacha.mercadolivre.controller.form;
 import br.com.zupacademy.natacha.mercadolivre.entity.Usuario;
 import br.com.zupacademy.natacha.mercadolivre.commons.validator.ValorUnico;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UsuarioForm {
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @NotBlank
     @Email
@@ -24,8 +27,17 @@ public class UsuarioForm {
         this.senha = senha;
     }
 
+    public UsuarioForm(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
     public Usuario toModel(){
-        return new Usuario(login,senha);
+        String senhaSec = encoder.encode(senha);
+        return new Usuario(login,senhaSec);
     }
 
 
