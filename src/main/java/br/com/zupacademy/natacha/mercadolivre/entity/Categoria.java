@@ -2,6 +2,7 @@ package br.com.zupacademy.natacha.mercadolivre.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 public class Categoria {
@@ -16,6 +17,9 @@ public class Categoria {
     @ManyToOne
     private Categoria categoriaMae;
 
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    private List<Produto> produto;
+
     @Deprecated
     public Categoria() {
     }
@@ -24,11 +28,27 @@ public class Categoria {
         this.nome = nome;
     }
 
+    public Categoria(String nome, Categoria categoriaMae, List<Produto> produto) {
+        this.nome = nome;
+        this.categoriaMae = categoriaMae;
+        this.produto = produto;
+    }
+
+
 
     public void setCategoriaMae(Categoria categoriaMae) {
         this.categoriaMae = categoriaMae;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public boolean isEmpty() {
+        return true;
+    }
 
+    public boolean isPresent() {
+        return true;
+    }
 }
