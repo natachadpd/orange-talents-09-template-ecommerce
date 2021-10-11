@@ -19,6 +19,11 @@ public class Caracteristicas {
 
     private String descricao;
 
+    public Caracteristicas() {
+    }
+
+    @Deprecated
+
 
     public Caracteristicas(@NotBlank String nome, String descricao) {
         this.nome = nome;

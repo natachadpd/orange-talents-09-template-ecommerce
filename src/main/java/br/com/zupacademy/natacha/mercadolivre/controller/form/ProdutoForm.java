@@ -4,15 +4,21 @@ import br.com.zupacademy.natacha.mercadolivre.commons.validator.ExistsId;
 import br.com.zupacademy.natacha.mercadolivre.entity.Caracteristicas;
 import br.com.zupacademy.natacha.mercadolivre.entity.Categoria;
 import br.com.zupacademy.natacha.mercadolivre.entity.Produto;
+import br.com.zupacademy.natacha.mercadolivre.entity.Usuario;
+import org.apache.commons.io.FileUtils;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
+import java.io.File;
 import java.math.BigDecimal;
+import java.util.Base64;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProdutoForm {
+
+
 
     @NotBlank
     private String nomeProduto;
@@ -31,6 +37,9 @@ public class ProdutoForm {
     @ExistsId(domainClass = Categoria.class, fieldName = "id")
     private Long id;
 
+//    private Long idUsuario;
+
+
 
     @NotBlank
     @Length(max = 1000, message = "Máximo 1000 caracteres")
@@ -44,15 +53,19 @@ public class ProdutoForm {
         this.caracteristicas = caracteristicas;
         this.id = id;
         this.descricao = descricao;
+//        this.idUsuario = idUsuario;
     }
 
-    public Produto toProduto(EntityManager manager) {
+    public Produto toProduto(EntityManager manager, Usuario dono) {
             Set<Caracteristicas> caracteristicasModelo = caracteristicas.stream()
                     .map(c -> c.toCaracteristicas()).collect(Collectors.toSet());
             Categoria categoria = manager.find(Categoria.class, id);
-            return new Produto(nomeProduto, valor, qtdDisponivel, caracteristicasModelo, categoria, descricao);
+//            Usuario dono = manager.find(Usuario.class, idUsuario);
+//            return new Produto(nomeProduto, valor, qtdDisponivel, caracteristicasModelo, categoria, descricao, dono);
 
+        return new Produto(nomeProduto, valor, qtdDisponivel, caracteristicasModelo, categoria, descricao, dono);
         }
+
 
 
     }
