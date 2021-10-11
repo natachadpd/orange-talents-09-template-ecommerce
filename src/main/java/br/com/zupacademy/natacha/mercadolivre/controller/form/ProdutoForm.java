@@ -5,14 +5,11 @@ import br.com.zupacademy.natacha.mercadolivre.entity.Caracteristicas;
 import br.com.zupacademy.natacha.mercadolivre.entity.Categoria;
 import br.com.zupacademy.natacha.mercadolivre.entity.Produto;
 import br.com.zupacademy.natacha.mercadolivre.entity.Usuario;
-import org.apache.commons.io.FileUtils;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.*;
-import java.io.File;
 import java.math.BigDecimal;
-import java.util.Base64;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,8 +34,6 @@ public class ProdutoForm {
     @ExistsId(domainClass = Categoria.class, fieldName = "id")
     private Long id;
 
-//    private Long idUsuario;
-
 
 
     @NotBlank
@@ -53,16 +48,13 @@ public class ProdutoForm {
         this.caracteristicas = caracteristicas;
         this.id = id;
         this.descricao = descricao;
-//        this.idUsuario = idUsuario;
+
     }
 
     public Produto toProduto(EntityManager manager, Usuario dono) {
             Set<Caracteristicas> caracteristicasModelo = caracteristicas.stream()
                     .map(c -> c.toCaracteristicas()).collect(Collectors.toSet());
             Categoria categoria = manager.find(Categoria.class, id);
-//            Usuario dono = manager.find(Usuario.class, idUsuario);
-//            return new Produto(nomeProduto, valor, qtdDisponivel, caracteristicasModelo, categoria, descricao, dono);
-
         return new Produto(nomeProduto, valor, qtdDisponivel, caracteristicasModelo, categoria, descricao, dono);
         }
 

@@ -1,7 +1,6 @@
 package br.com.zupacademy.natacha.mercadolivre.entity;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -9,7 +8,6 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -60,8 +58,10 @@ public class Produto<encodedfile> {
     public Produto() {
     }
 
-    public Produto(@NotBlank String nomeProduto, @NotNull @Min(1) BigDecimal valor, @PositiveOrZero @NotNull Integer qtdDisponivel,
-                   @Size(min=3) Set<Caracteristicas> caracteristicas, @NotNull Categoria categoria, String descricao, @NotNull @Valid Usuario dono) {
+    public Produto(@NotBlank String nomeProduto, @NotNull @Min(1) BigDecimal valor,
+                   @PositiveOrZero @NotNull Integer qtdDisponivel,
+                   @Size(min=3) Set<Caracteristicas> caracteristicas,
+                   @NotNull Categoria categoria, String descricao, @NotNull @Valid Usuario dono) {
         this.nomeProduto = nomeProduto;
         this.valor = valor;
         this.qtdDisponivel = qtdDisponivel;

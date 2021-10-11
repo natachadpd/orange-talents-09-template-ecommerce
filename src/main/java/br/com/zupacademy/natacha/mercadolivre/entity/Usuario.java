@@ -45,11 +45,9 @@ public class Usuario implements UserDetails {
         this.dataHora = LocalDateTime.now();
     }
 
-
     public Long getId() {
         return id;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -89,6 +87,7 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 
 
 }

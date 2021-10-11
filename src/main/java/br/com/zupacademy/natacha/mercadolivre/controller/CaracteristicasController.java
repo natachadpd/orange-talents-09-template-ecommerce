@@ -1,9 +1,7 @@
 package br.com.zupacademy.natacha.mercadolivre.controller;
 
 import br.com.zupacademy.natacha.mercadolivre.controller.form.CaracteristicasForm;
-import br.com.zupacademy.natacha.mercadolivre.controller.form.ProdutoForm;
 import br.com.zupacademy.natacha.mercadolivre.entity.Caracteristicas;
-import br.com.zupacademy.natacha.mercadolivre.entity.Produto;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -8,6 +8,7 @@ import br.com.zupacademy.natacha.mercadolivre.entity.Usuario;
 import br.com.zupacademy.natacha.mercadolivre.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,9 +35,9 @@ public class ProdutoController<imagemForm> {
 
     @PostMapping
     @Transactional
-    public void cadastraProduto(@RequestBody @Valid ProdutoForm produtoForm) {
-        Usuario dono = usuarioRepository.findByLogin("teste2@teste.com").get();
-        Produto produto = produtoForm.toProduto(manager, dono);
+    public void cadastraProduto(@RequestBody @Valid ProdutoForm produtoForm,
+                                @AuthenticationPrincipal Usuario usuario) {
+        Produto produto = produtoForm.toProduto(manager, usuario);
 
         manager.persist(produto);
     }
@@ -45,7 +46,7 @@ public class ProdutoController<imagemForm> {
     @Transactional
     public String adicionarImagens(@PathVariable("id") Long id, @Valid ImagemForm imagemForm){
 
-        Usuario dono = usuarioRepository.findByLogin("teste2@teste.com").get();
+        Usuario dono = usuarioRepository.findByLogin("tesgte12@teste.com").get();
         Produto produto = manager.find(Produto.class, id);
 
         if(!produto.pertenceAoUsuario(dono)){
