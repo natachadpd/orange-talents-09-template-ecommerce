@@ -41,11 +41,11 @@ public class ProdutoController<imagemForm> {
         manager.persist(produto);
     }
 
-    @PostMapping(value = "/produtos/{id}/imagens")
+    @PostMapping(value = "/{id}/imagens")
     @Transactional
     public String adicionarImagens(@PathVariable("id") Long id, @Valid ImagemForm imagemForm){
 
-        Usuario dono = usuarioRepository.findByLogin("teste12@teste.com").get();
+        Usuario dono = usuarioRepository.findByLogin("teste2@teste.com").get();
         Produto produto = manager.find(Produto.class, id);
 
         if(!produto.pertenceAoUsuario(dono)){
