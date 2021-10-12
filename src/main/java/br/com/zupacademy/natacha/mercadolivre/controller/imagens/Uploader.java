@@ -1,4 +1,4 @@
-package br.com.zupacademy.natacha.mercadolivre.controller.form;
+package br.com.zupacademy.natacha.mercadolivre.controller.imagens;
 
 import org.springframework.web.multipart.MultipartFile;
 

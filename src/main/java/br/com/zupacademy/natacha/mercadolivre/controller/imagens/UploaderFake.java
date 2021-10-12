@@ -1,4 +1,4 @@
-package br.com.zupacademy.natacha.mercadolivre.controller.form;
+package br.com.zupacademy.natacha.mercadolivre.controller.imagens;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

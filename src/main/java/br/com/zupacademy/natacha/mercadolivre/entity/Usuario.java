@@ -45,6 +45,10 @@ public class Usuario implements UserDetails {
         this.dataHora = LocalDateTime.now();
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     public Long getId() {
         return id;
     }

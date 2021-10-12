@@ -19,10 +19,9 @@ public class Caracteristicas {
 
     private String descricao;
 
+    @Deprecated
     public Caracteristicas() {
     }
-
-    @Deprecated
 
 
     public Caracteristicas(@NotBlank String nome, String descricao) {

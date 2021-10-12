@@ -2,7 +2,7 @@ package br.com.zupacademy.natacha.mercadolivre.controller;
 
 import br.com.zupacademy.natacha.mercadolivre.controller.form.ImagemForm;
 import br.com.zupacademy.natacha.mercadolivre.controller.form.ProdutoForm;
-import br.com.zupacademy.natacha.mercadolivre.controller.form.Uploader;
+import br.com.zupacademy.natacha.mercadolivre.controller.imagens.Uploader;
 import br.com.zupacademy.natacha.mercadolivre.entity.Produto;
 import br.com.zupacademy.natacha.mercadolivre.entity.Usuario;
 import br.com.zupacademy.natacha.mercadolivre.repository.UsuarioRepository;
@@ -46,7 +46,7 @@ public class ProdutoController<imagemForm> {
     @Transactional
     public String adicionarImagens(@PathVariable("id") Long id, @Valid ImagemForm imagemForm){
 
-        Usuario dono = usuarioRepository.findByLogin("tesgte12@teste.com").get();
+        Usuario dono = usuarioRepository.findByLogin("tesgte12@testve.com").get();
         Produto produto = manager.find(Produto.class, id);
 
         if(!produto.pertenceAoUsuario(dono)){

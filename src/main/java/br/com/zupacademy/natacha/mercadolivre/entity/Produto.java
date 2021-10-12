@@ -58,6 +58,10 @@ public class Produto<encodedfile> {
     public Produto() {
     }
 
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
     public Produto(@NotBlank String nomeProduto, @NotNull @Min(1) BigDecimal valor,
                    @PositiveOrZero @NotNull Integer qtdDisponivel,
                    @Size(min=3) Set<Caracteristicas> caracteristicas,
@@ -98,4 +102,5 @@ public class Produto<encodedfile> {
     public boolean pertenceAoUsuario(Usuario possivelDono) {
         return this.dono.equals(possivelDono);
     }
+
 }
