@@ -1,5 +1,8 @@
 package br.com.zupacademy.natacha.mercadolivre.entity;
 
+import br.com.zupacademy.natacha.mercadolivre.controller.dto.DetalheProdutoCaracteristica;
+import br.com.zupacademy.natacha.mercadolivre.controller.dto.Opinioes;
+import org.hibernate.query.Query;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -9,10 +12,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Entity
-public class Produto<encodedfile> {
+public class Produto{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +45,6 @@ public class Produto<encodedfile> {
     @ManyToOne
     private Categoria categoria;
 
-
-
     @NotBlank
     @Length(max = 1000, message = "Máximo 1000 caracteres")
     private String descricao;
@@ -53,6 +58,13 @@ public class Produto<encodedfile> {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<ImagemProduto> imagens = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto")
+    @OrderBy("titulo asc")
+    private SortedSet<Pergunta> perguntas = new TreeSet<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+    private Set<Opiniao> opinioes = new HashSet<>();;
 
     @Deprecated
     public Produto() {
@@ -103,4 +115,37 @@ public class Produto<encodedfile> {
         return this.dono.equals(possivelDono);
     }
 
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Set<Caracteristicas> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public <T> Set<T>  mapeiaCaracteristicas(Function<Caracteristicas, T> funcaoMapeadora){
+        return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T> Set<T>  mapeiaImagens(Function<ImagemProduto, T> funcaoMapeadora){
+        return this.imagens.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+    }
+
+    public <T extends  Comparable<T>> SortedSet<T>  mapeiaPerguntas(Function<Pergunta, T> funcaoMapeadora){
+        return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
+    }
+
+
+
+    public Opinioes getOpinioes() {
+        return new Opinioes(this.opinioes);
+    }
 }

@@ -29,6 +29,14 @@ public class Caracteristicas {
         this.descricao = descricao;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,4 +49,6 @@ public class Caracteristicas {
     public int hashCode() {
         return Objects.hash(nome, descricao);
     }
+
+
 }
