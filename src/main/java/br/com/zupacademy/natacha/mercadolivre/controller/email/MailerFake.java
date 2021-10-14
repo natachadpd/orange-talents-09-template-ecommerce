@@ -29,6 +29,7 @@ public class MailerFake implements  Mailer {
     }
 
 
+
     public void novaPergunta(@NotNull @Valid Pergunta pergunta, Usuario usuario, Produto produto) {
         mailer.enviar("Pergunta sobre o produto: " + produto.getNomeProduto(),
                      "Usuário interessado: " + usuario.getLogin() ,
@@ -36,5 +37,7 @@ public class MailerFake implements  Mailer {
                          "Título: "+ pergunta.getTitulo(),
                       "Pergunta: "+ pergunta.getPergunta() );
     }
+
+
 
 }

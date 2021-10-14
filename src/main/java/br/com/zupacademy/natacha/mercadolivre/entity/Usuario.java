@@ -105,6 +105,8 @@ public class Usuario implements UserDetails {
     public int hashCode() {
         return Objects.hash(login);
     }
+
+
 }
 
 

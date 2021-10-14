@@ -1,9 +1,8 @@
 package br.com.zupacademy.natacha.mercadolivre.entity;
 
-import br.com.zupacademy.natacha.mercadolivre.controller.dto.DetalheProdutoCaracteristica;
 import br.com.zupacademy.natacha.mercadolivre.controller.dto.Opinioes;
-import org.hibernate.query.Query;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -15,11 +14,11 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Entity
 public class Produto{
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +64,7 @@ public class Produto{
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private Set<Opiniao> opinioes = new HashSet<>();;
+
 
     @Deprecated
     public Produto() {
@@ -143,9 +143,25 @@ public class Produto{
         return this.perguntas.stream().map(funcaoMapeadora).collect(Collectors.toCollection(TreeSet::new));
     }
 
-
-
     public Opinioes getOpinioes() {
         return new Opinioes(this.opinioes);
     }
+
+
+    public boolean temEstoque(@Min(1) Integer qtdDisponivel){
+        return this.qtdDisponivel >= qtdDisponivel;
+    }
+
+
+    public  boolean estoqueAtualiza(@Positive Integer qtdDisponivel){
+        Assert.isTrue(qtdDisponivel > 0, "A quantidade deve ser maior que zero para abater o estoque "+qtdDisponivel);
+        if(temEstoque (qtdDisponivel)){
+            this.qtdDisponivel-=qtdDisponivel;
+            return true;
+        }
+
+        return false;
+    }
+
 }
+
