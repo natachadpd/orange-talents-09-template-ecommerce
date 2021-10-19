@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsIdValidator implements ConstraintValidator <ExistsId, Object>{
+public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
 
     private String campo;
     private Class<?> classes;
@@ -24,16 +24,16 @@ public class ExistsIdValidator implements ConstraintValidator <ExistsId, Object>
 
     @Override
     public boolean isValid(Object valorCampo, ConstraintValidatorContext context) {
-        if(valorCampo == null) {
+        if (valorCampo == null) {
             return true;
         }
 
-        Query query = manager.createQuery("select 1 from "+classes.getName()+" where "+campo+"=:value");
+        Query query = manager.createQuery("select 1 from " + classes.getName() + " where " + campo + "=:value");
         query.setParameter("value", valorCampo);
 
 
         List<?> list = query.getResultList();
-        Assert.isTrue(list.size() <=1, "você tem mais de um "+classes+" com o atributo "+campo+" com o valor = "+valorCampo);
+        Assert.isTrue(list.size() <= 1, "você tem mais de um " + classes + " com o atributo " + campo + " com o valor = " + valorCampo);
 
         return !list.isEmpty();
     }

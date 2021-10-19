@@ -27,7 +27,7 @@ public class ValorUnicoValidator implements ConstraintValidator<ValorUnico, Obje
         Query q = man.createQuery("select 1 from " + classes.getName() + " where " + campo + "=:value");
         q.setParameter("value", valorCampo);
         List<?> list = q.getResultList();
-        Assert.state(list.size() <=1, "Foi encontrado mais de um "+classes+" com o atributo "+campo+" = "+campo);
+        Assert.state(list.size() <= 1, "Foi encontrado mais de um " + classes + " com o atributo " + campo + " = " + campo);
 
         return list.isEmpty();
     }
