@@ -58,6 +58,10 @@ public class Pergunta implements Comparable<Pergunta> {
         return produto;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

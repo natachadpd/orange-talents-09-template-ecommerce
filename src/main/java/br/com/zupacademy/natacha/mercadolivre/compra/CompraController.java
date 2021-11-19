@@ -1,6 +1,6 @@
 package br.com.zupacademy.natacha.mercadolivre.compra;
 
-import br.com.zupacademy.natacha.mercadolivre.email.MailerFakeNovaCompra;
+import br.com.zupacademy.natacha.mercadolivre.email.EmailSend;
 import br.com.zupacademy.natacha.mercadolivre.produto.Produto;
 import br.com.zupacademy.natacha.mercadolivre.usuario.Usuario;
 import br.com.zupacademy.natacha.mercadolivre.usuario.UsuarioRepository;
@@ -30,7 +30,7 @@ public class CompraController {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private MailerFakeNovaCompra emails;
+    private EmailSend emails;
 
 
     @PostMapping
@@ -53,7 +53,7 @@ public class CompraController {
         if (estoque) {
             Compra novaCompra = compraForm.toCompra(produto, comprador.get());
             manager.persist(novaCompra);
-            emails.emailNovaCompra(comprador.get().getLogin(), compraForm.getGateway(), produto.getNomeProduto(), compraForm.getQuantidade());
+            emails.novaCompra(novaCompra, produto);
 
             GatewayPagamento gateway = compraForm.getGateway();
 

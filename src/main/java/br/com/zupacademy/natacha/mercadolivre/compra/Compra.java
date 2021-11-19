@@ -77,6 +77,9 @@ public class Compra {
         return produto;
     }
 
+    public Integer getQuantidade() {
+        return quantidade;
+    }
 
     public String urlGateway(UriComponentsBuilder uriComponentsBuilder) {
         return this.gatewayPagamento.geraUrl(this, uriComponentsBuilder);

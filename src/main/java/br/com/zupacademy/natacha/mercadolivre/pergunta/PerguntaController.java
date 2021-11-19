@@ -1,6 +1,7 @@
 package br.com.zupacademy.natacha.mercadolivre.pergunta;
 
-import br.com.zupacademy.natacha.mercadolivre.email.MailerFakePerguntas;
+import br.com.zupacademy.natacha.mercadolivre.email.EmailSend;
+import br.com.zupacademy.natacha.mercadolivre.email.MailerEmail;
 import br.com.zupacademy.natacha.mercadolivre.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,9 +22,9 @@ public class PerguntaController {
     @PersistenceContext
     private EntityManager manager;
 
-
     @Autowired
-    private MailerFakePerguntas emails;
+    private EmailSend emailSend;
+
 
     @PostMapping
     @Transactional
@@ -32,6 +33,7 @@ public class PerguntaController {
         Pergunta pergunta = perguntaForm.toPergunta(manager, usuario);
         manager.persist(pergunta);
 
-        emails.novaPergunta(pergunta, usuario, pergunta.getProduto());
+        emailSend.novaPergunta(pergunta, pergunta.getProduto());
+//        emails.novaPergunta(pergunta, usuario, pergunta.getProduto());
     }
 }

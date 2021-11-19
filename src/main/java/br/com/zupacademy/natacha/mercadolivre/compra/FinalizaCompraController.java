@@ -2,8 +2,7 @@ package br.com.zupacademy.natacha.mercadolivre.compra;
 
 import br.com.zupacademy.natacha.mercadolivre.compra.clients.NotaFiscal;
 import br.com.zupacademy.natacha.mercadolivre.compra.clients.Ranking;
-import br.com.zupacademy.natacha.mercadolivre.email.MailerFakeTransacaoSemSucesso;
-import br.com.zupacademy.natacha.mercadolivre.email.MailerFakeTransacaoSucesso;
+import br.com.zupacademy.natacha.mercadolivre.email.EmailSend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,13 +27,10 @@ public class FinalizaCompraController {
     private EventoNovaCompra eventosNovaCompra;
 
     @Autowired
-    private MailerFakeTransacaoSucesso mailer;
-
-    @Autowired
     private Ranking ranking;
 
     @Autowired
-    private MailerFakeTransacaoSemSucesso mailerSemSucessos;
+    private EmailSend mailer;
 
 
     @PostMapping(value = "/retorno-pagseguro/{id}")
@@ -61,9 +57,9 @@ public class FinalizaCompraController {
             nf.criaNota(compra.getId(), compra.getUsuario().getId());
             ranking.ranking(compra.getId(), compra.getDono().getId());
             eventosNovaCompra.processa(compra);
-            mailer.transacao(compra);
+            mailer.transacaoSucesso(compra);
         } else {
-            mailerSemSucessos.transacao(compra);
+            mailer.transacaoSemSucesso(compra);
         }
         return compra.toString();
 
